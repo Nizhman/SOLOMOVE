@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Pesanan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-[#f5f5dc] min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-yellow-950 text-white shadow-lg sticky top-0 z-50">
+      <div class="container mx-auto p-4 flex justify-between items-center">
+     
+        <img src="SoloMove.png" alt="TravelEase Logo" class="h-16 w-28">
+  
+    
+        <nav class="space-x-6 flex items-center">
+          <a href="../Beranda dan Layanan/Beranda.html" class="text-white font-medium hover:text-gray-200">Beranda</a>
+    
+      
+          <div class="relative">
+            <button id="kategoriButton" class="text-white font-medium hover:text-gray-200 focus:outline-none">
+              Kategori
+            </button>
+            <div id="kategoriMenu" class="absolute left-0 hidden bg-white text-black rounded-lg shadow-lg mt-2 w-48 z-10">
+              <a href="../rute dan jadwal/Rute.html" class="block px-4 py-2 hover:bg-gray-200">Rute & Jadwal</a>
+              <a href="../Reservasi dan Tiket/PemesananBis.html" class="block px-4 py-2 hover:bg-gray-200">Reservasi & Tiket</a>
+            </div>
+          </div>
+    
+          <a href="../Login,registrasi, dan kemitraan/kemit_kerjasama.html" class="text-white font-medium hover:text-gray-200">Tentang Mitra</a>
+          <a href="../Login,registrasi, dan kemitraan/kontakkami.html" class="text-white font-medium hover:text-gray-200">Tentang Kami</a>
+        </nav>
+        <a href="../Login,registrasi, dan kemitraan/login.html">
+          <button class=" p-2 bg-[#ff6f61] text-white text-medium font-bold rounded-full transition-all hover:bg-[#e55a50] hover:translate-y-1">Sign In</button>
+        </a>
+      </div>
+    </header>
+
+  <div class="container max-w-lg bg-white p-8 rounded-xl shadow-lg text-center mx-auto mt-8">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-6">Detail Pesanan</h1>
+    <p class="text-lg text-gray-600 mb-2"><strong>Asal:</strong> <span id="asal"></span></p>
+    <p class="text-lg text-gray-600 mb-2"><strong>Tujuan:</strong> <span id="tujuan"></span></p>
+    <p class="text-lg text-gray-600 mb-2"><strong>Tanggal:</strong> <span id="tanggal"></span></p>
+    <p class="text-lg text-gray-600 mb-2"><strong>Jumlah Penumpang:</strong> <span id="jumlah"></span></p>
+    <p class="text-lg text-gray-600 mb-2"><strong>Perusahaan:</strong> <span id="perusahaan"></span></p>
+    <p class="text-lg text-gray-600 mb-2"><strong>Perkiraan Sampai:</strong> <span id="waktu"></span></p>
+    <p class="text-lg text-gray-600 mb-4"><strong>Harga:</strong> Rp <span id="harga"></span></p>
+  </div>
+
+  <script>
+    const kategoriButton = document.getElementById('kategoriButton');
+  const kategoriMenu = document.getElementById('kategoriMenu');
+
+  // Toggle visibility on button click
+  kategoriButton.addEventListener('click', () => {
+    kategoriMenu.classList.toggle('hidden');
+  });
+
+  // Close the menu if clicking outside
+  document.addEventListener('click', (event) => {
+    if (!kategoriButton.contains(event.target) && !kategoriMenu.contains(event.target)) {
+      kategoriMenu.classList.add('hidden');
+    }
+  });
+
+    document.getElementById("asal").innerText = localStorage.getItem("asal") || "-";
+    document.getElementById("tujuan").innerText = localStorage.getItem("tujuan") || "-";
+    document.getElementById("tanggal").innerText = localStorage.getItem("tanggal") || "-";
+    document.getElementById("jumlah").innerText = localStorage.getItem("jumlah") || "-";
+    document.getElementById("perusahaan").innerText = localStorage.getItem("perusahaan") || "-";
+    document.getElementById("waktu").innerText = localStorage.getItem("waktu") || "-";
+    document.getElementById("harga").innerText = localStorage.getItem("harga") || "-";
+  </script>
+
+<footer class="bg-yellow-950 text-white py-16">
+  <div class="container mx-auto px-6 md:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Contact Info -->
+<div class="flex items-center sm:items-start space-x-6">
+  <!-- Gambar Kontak -->
+  <div class="flex-shrink-0">
+    <img src="logosolo.png" alt="Contact Illustration" class="w-28 h-28 rounded-full ">
+  </div>
+
+  <!-- Teks Kontak -->
+  <div>
+    <h3 class="text-2xl font-semibold mb-4">Informasi Kontak</h3>
+    <p class="text-gray-200 mb-2">📞 Phone: +62 812-3456-7890</p>
+    <p class="text-gray-200 mb-2">✉️ Email: <a href="mailto:support@travelease.com" class="text-blue-200 hover:underline">support@SoloMove.com</a></p>
+    <p class="text-gray-200">🏢 Alamat: Jalan Merdeka No. 123, solo</p>
+  </div>
+</div>
+
+      <!-- Social Media Links -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-4">Media Sosial</h3>
+        <p class="text-gray-200 mb-4">Ikuti kami di:</p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full hover:bg-blue-700 transition">
+            <i class="fab fa-facebook-f text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-blue-400 rounded-full hover:bg-blue-500 transition">
+            <i class="fab fa-twitter text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-pink-500 rounded-full hover:bg-pink-600 transition">
+            <i class="fab fa-instagram text-white"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Location Map -->
+      <div class="flex flex-col items-start">
+        <h3 class="text-2xl font-semibold mb-4">Peta Lokasi</h3>
+        <iframe class="w-full sm:w-72 h-40 rounded-lg shadow-md" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.917871931234!2d107.619122676234!3d-6.917463403759822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e64af083f2d3%3A0xd8ffce4f761f3b89!2sBandung!5e0!3m2!1sen!2sid!4v1614572980281!5m2!1sen!2sid" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- Additional Links -->
+    <div class="mt-10 text-center text-gray-200">
+      <p>
+        <a href="/privacy-policy" class="hover:underline mx-4">Kebijakan Privasi</a>
+        <span>|</span>
+        <a href="/terms-and-conditions" class="hover:underline mx-4">Syarat dan Ketentuan</a>
+        <span>|</span>
+        <a href="/copyright" class="hover:underline mx-4">Informasi Hak Cipta</a>
+      </p>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="mt-8 text-center text-gray-300 text-sm">
+      <p>&copy; 2024 Designed with kelompok 3</p>
+    </div>
+  </div>
+</footer>
+  
+  <style>
+    .hidden {
+    display: none;
+  }
+  </style>
+
+</body>
+</html>

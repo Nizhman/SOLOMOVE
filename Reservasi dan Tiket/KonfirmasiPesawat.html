@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konfirmasi Pesanan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+</head>
+<body class="bg-[#f5f5dc] min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-yellow-950 text-white shadow-lg sticky top-0 z-50">
+      <div class="container mx-auto p-4 flex justify-between items-center">
+     
+        <img src="SoloMove.png" alt="TravelEase Logo" class="h-16 w-28">
+  
+    
+        <nav class="space-x-6 flex items-center">
+          <a href="../Beranda dan Layanan/Beranda.html" class="text-white font-medium hover:text-gray-200">Beranda</a>
+    
+      
+          <div class="relative">
+            <button id="kategoriButton" class="text-white font-medium hover:text-gray-200 focus:outline-none">
+              Kategori
+            </button>
+            <div id="kategoriMenu" class="absolute left-0 hidden bg-white text-black rounded-lg shadow-lg mt-2 w-48 z-10">
+              <a href="../rute dan jadwal/Rute.html" class="block px-4 py-2 hover:bg-gray-200">Rute & Jadwal</a>
+              <a href="../Reservasi dan Tiket/PemesananBis.html" class="block px-4 py-2 hover:bg-gray-200">Reservasi & Tiket</a>
+            </div>
+          </div>
+    
+          <a href="../Login,registrasi, dan kemitraan/kemit_kerjasama.html" class="text-white font-medium hover:text-gray-200">Tentang Mitra</a>
+          <a href="../Login,registrasi, dan kemitraan/kontakkami.html" class="text-white font-medium hover:text-gray-200">Tentang Kami</a>
+        </nav>
+        <a href="../Login,registrasi, dan kemitraan/login.html">
+          <button class=" p-2 bg-[#ff6f61] text-white text-medium font-bold rounded-full transition-all hover:bg-[#e55a50] hover:translate-y-1">Sign In</button>
+        </a>
+      </div>
+    </header>
+
+  <!-- Main Content -->
+  <div class="flex flex-grow justify-center items-center">
+    <div class="container max-w-md bg-white p-8 rounded-xl shadow-lg text-center w-full mt-16">
+      <h1 class="text-2xl font-semibold text-gray-800 mb-6">Konfirmasi Pesanan</h1>
+      <h2 class="text-xl font-semibold text-gray-600 mb-4">Detail Perjalanan</h2>
+      <p class="text-lg text-gray-600 mb-2">Asal: Indonesia</p>
+      <p class="text-lg text-gray-600 mb-2">Tujuan: Swiss</p>
+      <p class="text-lg text-gray-600 mb-2">Tanggal: 2024-12-17</p>
+      <p class="text-lg text-gray-600 mb-2">Jumlah Penumpang: 2</p>
+
+      <h2 class="text-xl font-semibold text-gray-600 mb-4 mt-6">Detail pesawat</h2>
+      <p class="text-lg text-gray-600 mb-2">Perusahaan: PO Harapan</p>
+      <p class="text-lg text-gray-600 mb-2">Perkiraan Sampai: 15:00 WIB</p>
+      <p class="text-lg text-gray-600 mb-4">Harga: Rp 150,000</p>
+
+      <!-- Informasi Metode Pembayaran -->
+      <div class="payment-method bg-gray-50 p-4 mt-6 rounded-lg shadow-md">
+        <p class="text-lg text-gray-800 font-semibold mb-2">Metode Pembayaran:</p>
+        <p class="text-gray-600 mb-4">Silakan melakukan pembayaran menggunakan QRIS dengan memindai kode QR di bawah ini:</p>
+        
+        <!-- QR Code Image -->
+        <img src="dana.jpeg" alt="QRIS Image" class="mb-4 mx-auto">
+
+        <!-- QR Code -->
+        <div id="qris-container" class="flex justify-center mb-4">
+          <!-- QR code will be generated here -->
+        </div>
+
+        <p class="text-gray-600">Pembayaran dapat dilakukan melalui aplikasi e-wallet atau bank yang mendukung QRIS.</p>
+      </div>
+
+      <!-- Slider untuk konfirmasi -->
+      <div class="geser-container relative w-full mt-8 h-16 bg-gray-300 rounded-full flex items-center p-1 shadow-inner">
+        <div class="geser w-14 h-14 bg-yellow-800 rounded-full flex items-center justify-center cursor-pointer transition-all ease-out duration-300">
+          <span class="text-white text-2xl">✈️</span>
+        </div>
+      </div>
+      <div class="success-message hidden mt-6 text-lg font-semibold text-green-600">Pesanan Anda telah selesai!</div>
+    </div>
+  </div>
+
+  <script>
+    const kategoriButton = document.getElementById('kategoriButton');
+  const kategoriMenu = document.getElementById('kategoriMenu');
+
+  // Toggle visibility on button click
+  kategoriButton.addEventListener('click', () => {
+    kategoriMenu.classList.toggle('hidden');
+  });
+
+  // Close the menu if clicking outside
+  document.addEventListener('click', (event) => {
+    if (!kategoriButton.contains(event.target) && !kategoriMenu.contains(event.target)) {
+      kategoriMenu.classList.add('hidden');
+    }
+  });
+
+    const geser = document.querySelector('.geser');
+    const geserContainer = document.querySelector('.geser-container');
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    const maxTranslate = geserContainer.offsetWidth - geser.offsetWidth;
+
+    // Set data to localStorage
+    localStorage.setItem("asal", "Indonesia");
+    localStorage.setItem("tujuan", "Swiss");
+    localStorage.setItem("tanggal", "2024-12-17");
+    localStorage.setItem("jumlah", "2");
+    localStorage.setItem("perusahaan", "Garuda Indonesia");
+    localStorage.setItem("waktu", "15:00 WIB");
+    localStorage.setItem("harga", "150000");
+
+    geser.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      geser.style.transition = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const moveX = e.clientX - startX;
+      currentX = Math.max(0, Math.min(moveX, maxTranslate));
+      geser.style.transform = `translateX(${currentX}px)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      geser.style.transition = 'transform 0.3s ease';
+      if (currentX >= maxTranslate) {
+        geser.classList.add('bg-yellow-500');
+        geser.style.transform = `translateX(${maxTranslate}px)`;
+        setTimeout(() => {
+          window.location.href = 'selesaiBis.html';
+        }, 500);
+      } else {
+        geser.style.transform = 'translateX(0px)';
+      }
+    });
+  </script>
+<footer class="bg-yellow-950 text-white py-16">
+  <div class="container mx-auto px-6 md:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <!-- Contact Info -->
+<div class="flex items-center sm:items-start space-x-6">
+  <!-- Gambar Kontak -->
+  <div class="flex-shrink-0">
+    <img src="logosolo.png" alt="Contact Illustration" class="w-28 h-28 rounded-full ">
+  </div>
+
+  <!-- Teks Kontak -->
+  <div>
+    <h3 class="text-2xl font-semibold mb-4">Informasi Kontak</h3>
+    <p class="text-gray-200 mb-2">📞 Phone: +62 812-3456-7890</p>
+    <p class="text-gray-200 mb-2">✉️ Email: <a href="mailto:support@travelease.com" class="text-blue-200 hover:underline">support@SoloMove.com</a></p>
+    <p class="text-gray-200">🏢 Alamat: Jalan Merdeka No. 123, solo</p>
+  </div>
+</div>
+
+      <!-- Social Media Links -->
+      <div>
+        <h3 class="text-2xl font-semibold mb-4">Media Sosial</h3>
+        <p class="text-gray-200 mb-4">Ikuti kami di:</p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full hover:bg-blue-700 transition">
+            <i class="fab fa-facebook-f text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-blue-400 rounded-full hover:bg-blue-500 transition">
+            <i class="fab fa-twitter text-white"></i>
+          </a>
+          <a href="#" class="w-10 h-10 flex items-center justify-center bg-pink-500 rounded-full hover:bg-pink-600 transition">
+            <i class="fab fa-instagram text-white"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Location Map -->
+      <div class="flex flex-col items-start">
+        <h3 class="text-2xl font-semibold mb-4">Peta Lokasi</h3>
+        <iframe class="w-full sm:w-72 h-40 rounded-lg shadow-md" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.917871931234!2d107.619122676234!3d-6.917463403759822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e64af083f2d3%3A0xd8ffce4f761f3b89!2sBandung!5e0!3m2!1sen!2sid!4v1614572980281!5m2!1sen!2sid" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- Additional Links -->
+    <div class="mt-10 text-center text-gray-200">
+      <p>
+        <a href="/privacy-policy" class="hover:underline mx-4">Kebijakan Privasi</a>
+        <span>|</span>
+        <a href="/terms-and-conditions" class="hover:underline mx-4">Syarat dan Ketentuan</a>
+        <span>|</span>
+        <a href="/copyright" class="hover:underline mx-4">Informasi Hak Cipta</a>
+      </p>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="mt-8 text-center text-gray-300 text-sm">
+      <p>&copy; 2024 Designed with kelompok 3</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .hidden {
+  display: none;
+}
+</style>
+
+</body>
+</html>

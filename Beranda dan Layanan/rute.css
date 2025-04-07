@@ -1,0 +1,150 @@
+/* Mengatur margin dan padding default */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, rgb(216, 141, 43), rgb(209, 150, 83), rgb(71, 67, 60)); /* Gradasi dari coklat ke krem ke hitam */
+    color: white;
+    padding: 10px 20px;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Branding */
+.navbar-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Daftar navigasi */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* Item dalam daftar */
+nav ul li {
+    margin: 0 10px;
+}
+
+/* Tautan navigasi */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+/* Efek hover pada tautan */
+nav ul li a:hover {
+   
+    color: black; /* Teks berubah menjadi hitam saat hover */
+    border-radius: 5px;
+}
+
+/* Efek hover pada tautan */
+nav ul li a:hover {
+    color: black; /* Teks berubah menjadi hitam saat hover */
+    background-color: #0066cc; /* Background berubah menjadi biru saat hover */
+    border-radius: 5px;
+}
+
+/* Container untuk konten utama */
+main {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+/* Styling untuk section Rute & Jadwal */
+section#routes {
+    margin-top: 20px;
+}
+
+/* Styling untuk judul rute & jadwal */
+section#routes h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Tabel untuk menampilkan rute dan jadwal */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(90deg, rgb(216, 141, 43), rgb(209, 150, 83), rgb(71, 67, 60));
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Styling untuk link pesan tiket */
+section#routes p a {
+    color: #004080;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section#routes p a:hover {
+    color: #0066cc;
+}
+
+/* Styling untuk footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* Responsif: Navbar menjadi vertikal pada layar kecil */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    section#routes h1 {
+        font-size: 1.5em;
+    }
+
+    table, th, td {
+        font-size: 0.9em;
+    }
+}
